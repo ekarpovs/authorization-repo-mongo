@@ -1,6 +1,8 @@
-## Authorization via ACL Package
+## Authorization definitions on MongoDb.
 
-A npm package for users authorization via Access Control List for Node.js projects with the auth-session.
+A npm package that provides access to authorization definitions for Node.js projects.  
+The package is dedicated to be used with the @ekarpovs/authorization-checker package.  
+Supports ACL - Access Control List and RBAC - Role Based Access Control methods. 
 
 <p>
   <a href="https://www.npmjs.com/package/@ekarpovs/authorization-repo-mongo" target="_blank">
@@ -21,25 +23,24 @@ A npm package for users authorization via Access Control List for Node.js projec
 ```bash
   npm install @ekarpovs/authorization-repo-mongo
 ```
+
 ### Usage
 ```
-import { initAcl, checkPermission } from '@ekarpovs/authorization-repo-mongo'
+import { ModelType, initRules, rulesRepository } from '@ekarpovs/authorization-repo-mongo';
 
-// Create acl.json file:  
-// Look at the acl-example.json
+Create authorization definitions - acl.json or rbac.json file.    
 
-// Add the file into the .gitignore
+Add the file into the .gitignore.  
 
-// Init the ACL
-const location = './acl.json'
-initAsl(location) 
+If an application doesn't use a Rules Management feature do the following (once only):
 
-// Protect a router(s):
-router.get('/users', (req, res) => {
-  if (!checkPermission(req.user.role, '/users', 'R')) {
-    return res.sendStatus(403);
-  }
-  ...
-});
+populate the authorization definitions into the application DataBase:  
+  initRules(ModelType.ACL, aclData);
+or:  
+  initRules(ModelType.RBAC, rbacData);
+
+The authorization repository is ready to be used (injected into) by  
+the @ekarpovs/authorization-checker package.  
+
 ```
 
