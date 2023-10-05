@@ -28,13 +28,13 @@ Supports ACL - Access Control List and RBAC - Role Based Access Control methods.
 ```
 import { ModelType, initRules, rulesRepository } from '@ekarpovs/authorization-repo-mongo';
 
+If an application doesn't use a Rules Management feature do the following (once only):
+
 Create authorization definitions - acl.json or rbac.json file.    
 
 Add the file into the .gitignore.  
 
-If an application doesn't use a Rules Management feature do the following (once only):
-
-populate the authorization definitions into the application DataBase:  
+Populate the authorization definitions into the application DataBase:  
   initRules(ModelType.ACL, aclData);
 or:  
   initRules(ModelType.RBAC, rbacData);
